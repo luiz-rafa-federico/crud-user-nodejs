@@ -14,12 +14,12 @@ export default class User {
   @Column({ select: false })
   password!: string;
 
-  @Column("timestamp with time zone")
+  @Column()
   createdOn!: Date;
 
-  @Column("timestamp with time zone")
+  @Column()
   updatedOn!: Date;
 
   @Column()
-  isAdmin!: boolean;
+  isAdm!: boolean;
 }

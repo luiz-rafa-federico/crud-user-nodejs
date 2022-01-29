@@ -12,20 +12,20 @@ export const userSchema: yup.SchemaOf<UserSchema> = yup.object().shape({
     .transform((value, originalValue) => {
       return bcrypt.hashSync(originalValue, 10);
     }),
-  // createdOn: yup
-  //   .date()
-  //   .default(() => {
-  //     return new Date();
-  //   })
-  //   .transform(() => {
-  //     return new Date();
-  //   }),
-  // updatedOn: yup
-  //   .date()
-  //   .default(() => {
-  //     return new Date();
-  //   })
-  //   .transform(() => {
-  //     return new Date();
-  //   }),
+  createdOn: yup
+    .date()
+    .default(() => {
+      return new Date();
+    })
+    .transform(() => {
+      return new Date();
+    }),
+  updatedOn: yup
+    .date()
+    .default(() => {
+      return new Date();
+    })
+    .transform(() => {
+      return new Date();
+    }),
 });

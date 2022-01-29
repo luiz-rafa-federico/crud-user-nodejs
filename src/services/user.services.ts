@@ -1,11 +1,11 @@
 import { UsersRepositories } from "../repositories/user.repository";
 import { getCustomRepository } from "typeorm";
 
-import { UserType } from "../types/user.types";
+import { UserSchema } from "../types/user.types";
 
 export class CreateUserService {
-  async execute(data: UserType) {
-    const { email, name, password } = data;
+  async execute(data: UserSchema) {
+    const { email, name, password, isAdm, createdOn, updatedOn } = data;
 
     const usersRepository = getCustomRepository(UsersRepositories);
 
@@ -15,7 +15,14 @@ export class CreateUserService {
       throw new Error("E-mail already registered");
     }
 
-    const user = usersRepository.create({ name, email, password });
+    const user = usersRepository.create({
+      email,
+      name,
+      password,
+      isAdm,
+      createdOn,
+      updatedOn,
+    });
 
     await usersRepository.save(user);
 
