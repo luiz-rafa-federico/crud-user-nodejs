@@ -11,12 +11,15 @@ export default class User {
   @Column()
   email!: string;
 
-  @Column()
+  @Column({ select: false })
   password!: string;
 
-  @Column()
+  @Column("timestamp with time zone")
   createdOn!: Date;
 
-  @Column()
+  @Column("timestamp with time zone")
   updatedOn!: Date;
+
+  @Column()
+  isAdmin!: boolean;
 }

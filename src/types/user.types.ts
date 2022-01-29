@@ -4,16 +4,17 @@ export interface UserType {
   password: string;
 }
 
-export interface UserSchemaType {
+export interface UserSchema {
   name: string;
   email: string;
   password: string;
-  createdOn: Date;
-  updatedOn: Date;
+  // createdOn: Date;
+  // updatedOn: Date;
+  isAdm: boolean;
 }
 
-export interface UserSchemaValidate extends UserSchemaType {
-  validate: (data: UserType, arg1: ValidateArgs) => void;
+export interface UserSchemaValidate extends UserSchema {
+  validate: (data: UserType, arg2: ValidateArgs) => Promise<any>;
 }
 
 interface ValidateArgs {
