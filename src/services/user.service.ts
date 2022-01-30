@@ -2,6 +2,7 @@ import { UsersRepository } from "../repositories/user.repository";
 import { getCustomRepository } from "typeorm";
 
 import { UserSchema } from "../types/user.types";
+import { ErrorHandler } from "../utils/error";
 
 export class CreateUserService {
   async execute(data: UserSchema) {
@@ -12,7 +13,7 @@ export class CreateUserService {
     const emailAlreadyExists = await usersRepository.findOne({ email });
 
     if (emailAlreadyExists) {
-      throw new Error("E-mail already registered");
+      throw new ErrorHandler(400, "E-mail already registered");
     }
 
     const user = usersRepository.create({

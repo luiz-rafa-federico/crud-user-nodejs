@@ -4,6 +4,7 @@ import { getCustomRepository } from "typeorm";
 import { UsersRepository } from "../repositories/user.repository";
 import dotenv from "dotenv";
 import { LoginSchema } from "../types/user.types";
+import { ErrorHandler } from "../utils/error";
 
 dotenv.config();
 
@@ -16,9 +17,9 @@ export class LoginService {
     const user = await userRepository.findOne({ email });
 
     if (!user) {
-      throw new Error("User does not exist");
+      throw new ErrorHandler(404, "User does not exist");
     } else if (!bcrypt.compareSync(password, user.password)) {
-      throw new Error("User email and password missmatch");
+      throw new ErrorHandler(401, "User email and password missmatch");
     }
 
     const { name, uuid } = user;
