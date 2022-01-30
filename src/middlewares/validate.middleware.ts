@@ -1,10 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSchema } from "../types/user.types";
-import { SchemaOf } from "yup";
 
 export const validate =
-  (schema: SchemaOf<UserSchema>) =>
-  async (req: Request, res: Response, next: NextFunction) => {
+  (schema: any) => async (req: Request, res: Response, next: NextFunction) => {
     const data = req.body;
 
     try {

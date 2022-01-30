@@ -1,4 +1,4 @@
-import { UsersRepositories } from "../repositories/user.repository";
+import { UsersRepository } from "../repositories/user.repository";
 import { getCustomRepository } from "typeorm";
 
 import { UserSchema } from "../types/user.types";
@@ -7,7 +7,7 @@ export class CreateUserService {
   async execute(data: UserSchema) {
     const { email, name, password, isAdm, createdOn, updatedOn } = data;
 
-    const usersRepository = getCustomRepository(UsersRepositories);
+    const usersRepository = getCustomRepository(UsersRepository);
 
     const emailAlreadyExists = await usersRepository.findOne({ email });
 

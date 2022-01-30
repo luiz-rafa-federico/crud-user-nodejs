@@ -5,6 +5,7 @@ declare global {
   namespace Express {
     interface Request {
       validatedData?: SchemaOf<UserSchema>;
+      user?: { uuid: string };
     }
   }
 }

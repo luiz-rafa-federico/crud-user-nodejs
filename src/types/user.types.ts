@@ -6,3 +6,8 @@ export interface UserSchema {
   createdOn?: Date;
   updatedOn?: Date;
 }
+
+export interface LoginSchema {
+  email: string;
+  password: string;
+}

@@ -1,5 +1,5 @@
 import { userRoute } from "./user.route";
-import { userLogin } from "./user.login";
+import { userLogin } from "./login.route";
 import { Express } from "express";
 
 export const initializeRouter = (app: Express) => {

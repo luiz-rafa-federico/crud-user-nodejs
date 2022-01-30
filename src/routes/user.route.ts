@@ -8,7 +8,7 @@ const router = Router();
 const createUserController = new CreateUserController();
 
 export const userRoute = () => {
-  router.post("", validate(userSchema as any), createUserController.handle);
+  router.post("", validate(userSchema), createUserController.handle);
   router.get("");
   router.get("/profile");
   router.patch("/:uuid");
