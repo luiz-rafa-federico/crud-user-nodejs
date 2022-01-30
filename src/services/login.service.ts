@@ -19,7 +19,7 @@ export class LoginService {
     if (!user) {
       throw new ErrorHandler(404, "User does not exist");
     } else if (!bcrypt.compareSync(password, user.password)) {
-      throw new ErrorHandler(401, "User email and password missmatch");
+      throw new ErrorHandler(401, "Wrong email/password");
     }
 
     const { name, uuid } = user;

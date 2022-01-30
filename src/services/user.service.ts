@@ -1,6 +1,5 @@
 import { UsersRepository } from "../repositories/user.repository";
 import { getCustomRepository } from "typeorm";
-
 import { UserSchema } from "../types/user.types";
 import { ErrorHandler } from "../utils/error";
 
