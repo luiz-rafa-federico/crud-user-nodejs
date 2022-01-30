@@ -29,3 +29,23 @@ export class CreateUserService {
     return user;
   }
 }
+
+export class ListUsersService {
+  async execute() {
+    const usersRepository = getCustomRepository(UsersRepository);
+
+    const users = (await usersRepository.find()) as UserSchema[];
+
+    return users;
+  }
+}
+
+export class UserDataService {
+  async execute(id: string) {
+    const usersRepository = getCustomRepository(UsersRepository);
+
+    const user = (await usersRepository.findOne(id)) as UserSchema;
+
+    return user;
+  }
+}

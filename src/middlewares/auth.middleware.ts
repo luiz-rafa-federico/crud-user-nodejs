@@ -16,12 +16,10 @@ export const isAuthenticated = (
     process.env.SECRET_KEY as string,
     (err: any, decoded: any) => {
       if (err) {
-        next(err);
+        return res.status(401).json({ error: "Missing authorization headers" });
       }
 
-      const userId = decoded.id;
-
-      req.user = { uuid: userId };
+      req.userId = decoded.id;
 
       next();
     }
