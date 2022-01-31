@@ -49,3 +49,13 @@ export class UserDataService {
     return user;
   }
 }
+
+export class DeleteUserService {
+  async execute(id: string) {
+    const usersRepository = getCustomRepository(UsersRepository);
+
+    await usersRepository.delete(id);
+
+    return true;
+  }
+}

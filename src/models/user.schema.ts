@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { UserSchema } from "../types/user.types";
 
 export const userSchema: yup.SchemaOf<UserSchema> = yup.object().shape({
+  uuid: yup.string(),
   name: yup.string().required(),
   email: yup.string().email().required(),
   isAdm: yup.boolean().required(),

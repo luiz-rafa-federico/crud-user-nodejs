@@ -22,7 +22,7 @@ export const isAdm = async (
     if (!user) {
       throw new ErrorHandler(403, "User not found");
     } else if (user.isAdm !== true) {
-      throw new ErrorHandler(403, "Unauthorized");
+      throw new ErrorHandler(403, "Missing admin permissions");
     }
 
     next();
