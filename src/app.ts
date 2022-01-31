@@ -10,12 +10,12 @@ const app = express();
 
 app.use(express.json());
 
+initializeRouter(app);
+
 app.use(
   (err: ErrorHandler, req: Request, res: Response, next: NextFunction) => {
     handleError(err, res);
   }
 );
-
-initializeRouter(app);
 
 export default app;

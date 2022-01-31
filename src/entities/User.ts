@@ -21,5 +21,5 @@ export default class User {
   updatedOn!: Date;
 
   @Column()
-  isAdm!: boolean;
+  public readonly isAdm!: boolean;
 }

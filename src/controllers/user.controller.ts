@@ -17,9 +17,9 @@ export class CreateUserController {
 
       const { password: password, ...dataWithoutPassword } = user;
 
-      return res.status(201).json(dataWithoutPassword);
+      res.status(201).json(dataWithoutPassword);
     } catch (e) {
-      return res.status(400).json({ message: e });
+      res.status(400).json({ message: e });
     }
   }
 }
@@ -31,9 +31,9 @@ export class ListUsersController {
 
       const allUsers = await listUserService.execute();
 
-      return res.json(allUsers);
+      res.json(allUsers);
     } catch (e) {
-      return res.status(400).json({ message: e });
+      res.status(400).json({ message: e });
     }
   }
 }
@@ -47,9 +47,9 @@ export class UserDataController {
 
       const userData = await userDataService.execute(uuid as string);
 
-      return res.json(userData);
+      res.json(userData);
     } catch (e) {
-      return res.status(400).json({ message: e });
+      res.status(400).json({ message: e });
     }
   }
 }
@@ -61,13 +61,11 @@ export class DeleteUserController {
 
       const deleteUserService = new DeleteUserService();
 
-      const userToDelete = await deleteUserService.execute(uuid);
+      await deleteUserService.execute(uuid);
 
-      if (userToDelete) {
-        res.json({ message: "User deleted with success" });
-      }
+      res.json({ message: "User deleted with success" });
     } catch (e) {
-      return res.status(400).json({ message: e });
+      res.status(400).json({ message: e });
     }
   }
 }

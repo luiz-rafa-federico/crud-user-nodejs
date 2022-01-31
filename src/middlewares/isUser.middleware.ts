@@ -13,33 +13,34 @@ export const isUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  try {
-    const { uuid } = req.params;
+  const { uuid } = req.params;
+  const id = req.userId;
 
-    const token = req.headers.authorization?.split(" ")[1] as string;
+  const token = req.headers.authorization?.split(" ")[1] as string;
 
-    jwt.verify(
-      token as string,
-      process.env.SECRET_KEY as string,
-      async (err: any, decoded: any) => {
+  jwt.verify(
+    token as string,
+    process.env.SECRET_KEY as string,
+    async (err: any, decoded: any) => {
+      try {
         if (err) {
           throw new ErrorHandler(401, "Missing authorization headers");
         }
 
         let repo = getCustomRepository(UsersRepository);
 
-        let user = (await repo.findOne(uuid)) as UserSchema;
+        let userExists = (await repo.findOne(uuid)) as UserSchema;
 
-        if (!user) {
+        if (!userExists) {
           throw new ErrorHandler(403, "User not found");
-        } else if (user.uuid !== decoded?.id) {
+        } else if (id !== decoded?.id) {
           throw new ErrorHandler(403, "Unauthorized");
         }
 
         next();
+      } catch (e: any) {
+        next(e);
       }
-    );
-  } catch (e) {
-    next(res.json(e));
-  }
+    }
+  );
 };

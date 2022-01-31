@@ -13,20 +13,21 @@ export const isAdm = async (
   next: NextFunction
 ) => {
   try {
-    const uuid = req.userId;
+    const currentUserId = req.userId;
+    const { uuid } = req.params;
 
     const userRepo = getCustomRepository(UsersRepository);
 
-    let user = (await userRepo.findOne(uuid)) as UserSchema;
+    let currentUser = (await userRepo.findOne(currentUserId)) as UserSchema;
 
-    if (!user) {
-      throw new ErrorHandler(403, "User not found");
-    } else if (user.isAdm !== true) {
+    if (currentUser.isAdm !== true && currentUser.uuid !== uuid) {
       throw new ErrorHandler(403, "Missing admin permissions");
+    } else if (currentUser.isAdm !== true && currentUser.uuid === uuid) {
+      next();
+    } else {
+      next();
     }
-
-    next();
-  } catch (e) {
-    next(res.json(e));
+  } catch (e: any) {
+    next(e);
   }
 };

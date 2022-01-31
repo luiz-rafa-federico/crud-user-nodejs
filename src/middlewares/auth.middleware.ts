@@ -26,7 +26,7 @@ export const isAuthenticated = (
         next();
       }
     );
-  } catch (e) {
-    next(res.json(e));
+  } catch (e: any) {
+    next(e);
   }
 };
