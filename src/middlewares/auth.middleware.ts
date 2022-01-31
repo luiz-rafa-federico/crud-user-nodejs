@@ -27,6 +27,6 @@ export const isAuthenticated = (
       }
     );
   } catch (e) {
-    next(e);
+    next(res.json(e));
   }
 };

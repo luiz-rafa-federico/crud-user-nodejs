@@ -27,6 +27,6 @@ export const isAdm = async (
 
     next();
   } catch (e) {
-    next(e);
+    next(res.json(e));
   }
 };
