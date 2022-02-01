@@ -4,6 +4,7 @@ import {
   ListUsersController,
   UserDataController,
   DeleteUserController,
+  UpdateUserController,
 } from "../controllers/user.controller";
 import { userSchema } from "../schemas/user.schema";
 import { validate } from "../middlewares/validate.middleware";
@@ -17,6 +18,7 @@ const createUserController = new CreateUserController();
 const listUsersController = new ListUsersController();
 const userDataController = new UserDataController();
 const deleteUserController = new DeleteUserController();
+const updateUserController = new UpdateUserController();
 
 export const userRoute = () => {
   router.post("", validate(userSchema), createUserController.handle);
@@ -29,8 +31,13 @@ export const userRoute = () => {
     isAdm,
     deleteUserController.handle
   );
-
-  router.patch("/:uuid");
+  router.patch(
+    "/:uuid",
+    isAuthenticated,
+    isUser,
+    isAdm,
+    updateUserController.handle
+  );
 
   return router;
 };

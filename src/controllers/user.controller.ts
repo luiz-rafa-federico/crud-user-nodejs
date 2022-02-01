@@ -4,6 +4,7 @@ import {
   ListUsersService,
   UserDataService,
   DeleteUserService,
+  UpdateUserService,
 } from "../services/user.service";
 
 export class CreateUserController {
@@ -48,6 +49,25 @@ export class UserDataController {
       const userData = await userDataService.execute(uuid as string);
 
       res.json(userData);
+    } catch (e) {
+      res.status(400).json({ message: e });
+    }
+  }
+}
+
+export class UpdateUserController {
+  async handle(req: Request, res: Response) {
+    try {
+      const data = req.body;
+      const { uuid } = req.params;
+
+      const updateUserService = new UpdateUserService();
+
+      const userUpdated = await updateUserService.execute(uuid, data);
+
+      const { password: password, ...dataWihoutPassword } = userUpdated;
+
+      res.json(dataWihoutPassword);
     } catch (e) {
       res.status(400).json({ message: e });
     }

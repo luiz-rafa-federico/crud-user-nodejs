@@ -59,3 +59,17 @@ export class DeleteUserService {
     return true;
   }
 }
+
+export class UpdateUserService {
+  async execute(id: string, data: any) {
+    const usersRepository = getCustomRepository(UsersRepository);
+
+    const normalizeData = { updatedOn: Date(), ...data };
+
+    await usersRepository.update(id, normalizeData);
+
+    const userUpdated = (await usersRepository.findOne(id)) as UserSchema;
+
+    return userUpdated;
+  }
+}
