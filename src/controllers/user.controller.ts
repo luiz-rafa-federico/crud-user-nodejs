@@ -48,7 +48,9 @@ export class UserDataController {
 
       const userData = await userDataService.execute(uuid as string);
 
-      res.json(userData);
+      const { password: password, ...dataWithoutPassword } = userData;
+
+      res.json(dataWithoutPassword);
     } catch (e) {
       res.status(400).json({ message: e });
     }

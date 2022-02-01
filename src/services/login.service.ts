@@ -28,7 +28,7 @@ export class LoginService {
       { name: name, id: uuid, email: email },
       process.env.SECRET_KEY as string,
       {
-        expiresIn: process.env.EXPIRES,
+        expiresIn: process.env.EXPIRES as string,
       }
     );
 

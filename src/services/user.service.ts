@@ -63,7 +63,7 @@ export class DeleteUserService {
 export class UpdateUserService {
   async execute(id: string, data: any) {
     if (data.hasOwnProperty("isAdm")) {
-      throw new ErrorHandler(400, "Unauthorized");
+      throw new ErrorHandler(400, "Forbidden to alter admin permissions");
     }
 
     const usersRepository = getCustomRepository(UsersRepository);
