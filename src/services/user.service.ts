@@ -62,6 +62,10 @@ export class DeleteUserService {
 
 export class UpdateUserService {
   async execute(id: string, data: any) {
+    if (data.hasOwnProperty("isAdm")) {
+      throw new ErrorHandler(400, "Unauthorized");
+    }
+
     const usersRepository = getCustomRepository(UsersRepository);
 
     const normalizeData = { updatedOn: Date(), ...data };

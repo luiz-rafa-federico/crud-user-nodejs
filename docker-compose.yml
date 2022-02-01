@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: crud-node-05
+    build: .
+    command: npm run dev
+    ports: "5050:5050"
+    environment:
+      - PG_PASSWORD: "1234"
+      - PG_DB: "kenwallet"
+      - PG_USER: "luizrafaelverronefederico"
+      - PG_HOST: "db"
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+  db:
+    container_name: db_crud_node
+    image: postgres
+    restart: always
+    environment:
+      - "POSTGRES_USER": "luizrafaelverronefederico"
+      - "POSTGRES_PASSWORD": "1234"
+      - "POSTGRES_DB": "ducknode"
+    ports:
+      - 5432:5432

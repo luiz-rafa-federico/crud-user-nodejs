@@ -4,7 +4,7 @@ dotenv.config();
 
 const devEnv = {
   type: "postgres",
-  host: process.env.PG_HOST,
+  host: process.env.PG_HOST_LOCAL,
   port: "5432",
   database: process.env.PG_DB,
   username: process.env.PG_USER,
